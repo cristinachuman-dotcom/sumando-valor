@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumando Valor — Consultoría Logística</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #1A6B4A;
+    --verde-claro: #D4EDE0;
+    --verde-medio: #2E9B6C;
+    --acento: #E8A225;
+    --acento-claro: #FDF3DA;
+    --oscuro: #141410;
+    --gris: #6B6B60;
+    --gris-claro: #F4F3EE;
+    --borde: #D8D6CC;
+    --blanco: #FAFAF7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--blanco);
+    color: var(--oscuro);
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--blanco);
+    border-bottom: 1px solid var(--borde);
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--verde);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .logo em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--oscuro);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--gris);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--verde); }
+
+  .nav-cta {
+    background: var(--verde);
+    color: white !important;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--verde-medio) !important; color: white !important; }
+
+  /* HERO */
+  .hero {
+    padding: 6rem 5% 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--verde);
+    background: var(--verde-claro);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    margin-bottom: 1.5rem;
+    color: var(--oscuro);
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--verde);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--gris);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--verde);
+    color: white;
+    padding: 13px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--verde-medio); transform: translateY(-1px); }
+
+  .btn-secondary {
+    border: 1.5px solid var(--borde);
+    color: var(--oscuro);
+    padding: 13px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover { border-color: var(--verde); color: var(--verde); transform: translateY(-1px); }
+
+  /* Hero visual */
+  .hero-visual {
+    background: var(--verde);
+    border-radius: 16px;
+    padding: 2.5rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: var(--verde-medio);
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .hero-visual::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 140px; height: 140px;
+    background: var(--acento);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+
+  .hero-stats {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,0.08);
+    padding: 1.25rem;
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--acento);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+  }
+
+  .hero-tag {
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  .hero-tag strong {
+    color: white;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* STRIP */
+  .strip {
+    background: var(--gris-claro);
+    border-top: 1px solid var(--borde);
+    border-bottom: 1px solid var(--borde);
+    padding: 1.25rem 5%;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gris);
+    letter-spacing: 0.3px;
+  }
+
+  /* SERVICIOS */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--verde);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: -0.8px;
+    margin-bottom: 3rem;
+    color: var(--oscuro);
+    line-height: 1.2;
+  }
+
+  .section-title em { font-style: italic; color: var(--verde); }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .servicio-card {
+    border: 1.5px solid var(--borde);
+    border-radius: 14px;
+    padding: 2rem;
+    background: white;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .servicio-card:hover {
+    border-color: var(--verde);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(26,107,74,0.10);
+  }
+
+  .servicio-card.featured {
+    background: var(--verde);
+    border-color: var(--verde);
+    color: white;
+  }
+
+  .servicio-num {
+    font-family: 'Fraunces', serif;
+    font-size: 13px;
+    color: var(--verde);
+    font-weight: 300;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .servicio-card.featured .servicio-num { color: rgba(255,255,255,0.6); }
+
+  .servicio-num::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--verde-claro);
+  }
+
+  .servicio-card.featured .servicio-num::after { background: rgba(255,255,255,0.3); }
+
+  .servicio-card h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
+    color: var(--oscuro);
+  }
+
+  .servicio-card.featured h3 { color: white; }
+
+  .servicio-card p {
+    font-size: 13px;
+    color: var(--gris);
+    line-height: 1.65;
+  }
+
+  .servicio-card.featured p { color: rgba(255,255,255,0.75); }
+
+  /* DIFERENCIADOR */
+  .dif-section {
+    background: var(--oscuro);
+    padding: 5rem 5%;
+  }
+
+  .dif-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .dif-label {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--acento);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .dif-title {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .dif-title em { font-style: italic; color: var(--acento); }
+
+  .dif-body {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+  }
+
+  .dif-pills {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dif-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .dif-pill-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    background: var(--acento);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+  }
+
+  .dif-pill h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 3px;
+  }
+
+  .dif-pill p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* PROCESO */
+  .proceso-section {
+    background: var(--gris-claro);
+    padding: 5rem 5%;
+  }
+
+  .proceso-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: 3rem;
+  }
+
+  .proceso-steps::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(to right, var(--verde-claro), var(--verde), var(--verde), var(--verde-claro));
+    z-index: 0;
+  }
+
+  .proceso-step {
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .proceso-step-num {
+    width: 56px;
+    height: 56px;
+    background: var(--verde);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+    border: 3px solid var(--gris-claro);
+  }
+
+  .proceso-step h4 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: var(--oscuro);
+  }
+
+  .proceso-step p {
+    font-size: 12px;
+    color: var(--gris);
+    line-height: 1.6;
+  }
+
+  /* CTA FINAL */
+  .cta-section {
+    padding: 6rem 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cta-badge {
+    display: inline-block;
+    background: var(--acento-claro);
+    color: var(--oscuro);
+    font-size: 12px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .cta-title {
+    font-family: 'Fraunces', serif;
+    font-size: 44px;
+    font-weight: 300;
+    letter-spacing: -1.2px;
+    color: var(--oscuro);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+
+  .cta-title em { font-style: italic; color: var(--verde); }
+
+  .cta-sub {
+    font-size: 16px;
+    color: var(--gris);
+    margin-bottom: 2.5rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--oscuro);
+    padding: 2.5rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+    letter-spacing: -0.3px;
+  }
+
+  .footer-logo strong {
+    font-weight: 500;
+    color: var(--acento);
+  }
+
+  .footer-right {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-align: right;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left { animation: fadeUp 0.7s ease both; }
+  .hero-visual { animation: fadeUp 0.7s ease 0.15s both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Sumando <em>Valor</em></a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto" class="nav-cta">Conversemos</a></li>
+  </ul>
+</nav>
+
+<section style="background: var(--blanco);">
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Consultoría logística · Lima, Perú</div>
+      <h1>Tu operación puede <em>rendir más</em> de lo que crees.</h1>
+      <p class="hero-sub">Reducimos costos, optimizamos espacios y alineamos tu logística con tus objetivos comerciales. Acompañamos la implementación y medimos resultados reales.</p>
+      <div class="btn-row">
+        <a href="#contacto" class="btn-primary">Agendar diagnóstico →</a>
+        <a href="#proceso" class="btn-secondary">Ver proceso</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">–30%</div>
+          <div class="stat-label">reducción en costos logísticos</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">–25%</div>
+          <div class="stat-label">reducción de espacio de almacenaje</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">+40%</div>
+          <div class="stat-label">eficiencia operativa medible</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">acompañamiento en implementación</div>
+        </div>
+      </div>
+      <div class="hero-tag">
+        <strong>No entregamos diagnósticos y nos vamos.</strong>
+        Trabajamos junto a tu equipo hasta que los números cambian.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  Distribución · Última milla · Supply chain · Almacenaje · Operadores logísticos · FMCG · Retail
+</div>
+
+<section class="section" id="servicios">
+  <div class="section-label">Lo que hacemos</div>
+  <h2 class="section-title">Cuatro frentes,<br><em>un solo objetivo: tu margen.</em></h2>
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <div class="servicio-num">01</div>
+      <h3>Optimización de costos logísticos</h3>
+      <p>Identificamos ineficiencias en rutas, frecuencias y estructura de costos para liberar margen operativo. Los ahorros se ven en el P&L.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">02</div>
+      <h3>Reducción de espacios de almacenaje</h3>
+      <p>Rediseñamos layouts y flujos para que trabajes con menos m² y más rotación. Sin inversión en infraestructura nueva.</p>
+    </div>
+    <div class="servicio-card featured">
+      <div class="servicio-num">03</div>
+      <h3>Eficiencia operativa medible</h3>
+      <p>Definimos KPIs, línea base y meta. El % de mejora no es una promesa — es parte del contrato. Medimos juntos.</p>
+    </div>
+    <div class="servicio-card">
+      <div class="servicio-num">04</div>
+      <h3>Cohesión logística–comercial</h3>
+      <p>Alineamos operaciones y ventas para eliminar la fricción que frena el crecimiento. Porque las dos áreas tienen que ir en la misma dirección.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dif-section">
+  <div class="dif-inner">
+    <div>
+      <div class="dif-label">Nuestra diferencia</div>
+      <h2 class="dif-title">No entregamos diagnósticos<br><em>y nos vamos.</em></h2>
+      <p class="dif-body">Acompañamos la implementación de cada recomendación, trabajamos junto a tu equipo en piso y medimos el impacto real. Porque la diferencia entre un buen diagnóstico y una operación mejorada está en la ejecución.</p>
+    </div>
+    <div class="dif-pills">
+      <div class="dif-pill">
+        <div class="dif-pill-icon">📍</div>
+        <div>
+          <h4>Trabajo en piso</h4>
+          <p>Nos integramos a tu operación. Vemos los problemas donde ocurren, no desde una presentación.</p>
+        </div>
+      </div>
+      <div class="dif-pill">
+        <div class="dif-pill-icon">📊</div>
+        <div>
+          <h4>Resultados medibles</h4>
+          <p>Establecemos una línea base al inicio. Al cierre, los números hablan solos.</p>
+        </div>
+      </div>
+      <div class="dif-pill">
+        <div class="dif-pill-icon">🤝</div>
+        <div>
+          <h4>Alineación comercial</h4>
+          <p>Integramos los equipos de ventas y operaciones para que trabajen hacia el mismo objetivo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proceso-section" id="proceso">
+  <div class="proceso-inner">
+    <div class="section-label">Nuestro proceso</div>
+    <h2 class="section-title">Cuatro pasos, <em>resultados concretos.</em></h2>
+    <div class="proceso-steps">
+      <div class="proceso-step">
+        <div class="proceso-step-num">1</div>
+        <h4>Diagnóstico operativo</h4>
+        <p>Revisamos costos, flujos, layout y nivel de servicio. Identificamos brechas con datos, no suposiciones.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-step-num">2</div>
+        <h4>Plan de mejora</h4>
+        <p>Priorizamos iniciativas por impacto y factibilidad. Con % de mejora proyectado y cronograma.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-step-num">3</div>
+        <h4>Implementación acompañada</h4>
+        <p>Trabajamos junto a tu equipo. Ajustamos en tiempo real según lo que el piso nos dice.</p>
+      </div>
+      <div class="proceso-step">
+        <div class="proceso-step-num">4</div>
+        <h4>Medición y cierre</h4>
+        <p>Comparamos resultados contra línea base. Entregamos reporte ejecutivo con los impactos logrados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contacto">
+  <div class="cta-badge">Diagnóstico gratuito disponible</div>
+  <h2 class="cta-title">¿Tu operación está dejando<br><em>dinero sobre la mesa?</em></h2>
+  <p class="cta-sub">Una conversación de 30 minutos puede revelar más de lo que esperas.</p>
+  <div class="btn-row" style="justify-content: center;">
+    <a href="https://wa.me/51999999999?text=Hola,%20me%20interesa%20un%20diagnóstico%20logístico%20con%20Sumando%20Valor" class="btn-primary" target="_blank">Escribirnos por WhatsApp →</a>
+    <a href="https://www.linkedin.com/company/sumando-valor" class="btn-secondary" target="_blank">Ver en LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><strong>Sumando</strong> Valor</div>
+  <div class="footer-right">
+    Consultoría logística · Lima, Perú<br>
+    © 2026 Sumando Valor
+  </div>
+</footer>
+
+</body>
+</html>
